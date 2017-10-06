@@ -8,8 +8,7 @@ Frogger is a one player retro game where a frog must cross multiple lanes and a 
 
 ## Wireframe
 
-(Your wireframes go here. Preferably two or more)
-You need to have wireframes and a filled-out [project proposal template](./proposal-template.md).
+[Wire....frame...s](./assets).
 
 ## Initial thoughts on game structure
 
