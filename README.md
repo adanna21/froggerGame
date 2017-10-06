@@ -8,12 +8,7 @@ Frogger is a one player retro game where a frog must cross multiple lanes and a 
 
 ## Wireframe
 
-<<<<<<< HEAD
-(Your wireframes go here. Preferably two or more)
-You need to have wireframes and a filled-out [Wire...frame...s](https://github.com/adanna21/froggerGame/tree/master/assests).
-=======
-[Wire....frame...s](https://github.com/adanna21/froggerGame/tree/master/assests).
->>>>>>> c00196682859622884693b513043d61c20d3137d
+[Wire...frame...s](https://github.com/adanna21/froggerGame/tree/master/assests).
 
 ## Initial thoughts on game structure
 
