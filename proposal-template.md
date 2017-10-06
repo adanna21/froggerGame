@@ -23,20 +23,20 @@ You need to have wireframes and a filled-out [project proposal template](./propo
 | 10/6        | **Phase 1: Project Approvals**<br/> Research frogger games, create a mockup, write the proposal, look for jquery guides.                                                                                              |
 | 10/6-10/9 | **Phase 2: Design & Functionality**<br/> Create a design and sketch out everything. Code it, and have it 70% complete. |
 | 10/10-10/11 | **Phase 3: Functionality**<br/> 
--Collision detection solved
--Ability to add lives when frogger lands on fly
--Ability to store name and score into high score page 
--Ability to remove scores in high scores page based on length
--Ability to end game if timer runs out
--Ability to add points if frogger accompanies other frog to other side                                                                                                                                                |
+- Collision detection solved
+- Ability to add lives when frogger lands on fly
+- Ability to store name and score into high score page 
+- Ability to remove scores in high scores page based on length
+- Ability to end game if timer runs out
+- Ability to add points if frogger accompanies other frog to other side                                                                                                                                                |
 | 10/12        | **Phase 3:**<br/> 
--Add prototypes
--Optimize
--Push it!                                                                                                                                                            |
+- Add prototypes
+- Optimize
+- Push it!                                                                                                                                                            |
 ---
 
 ## Links and Resources
 
--Frogger Game Sample: http://www.frogger.net/
--Collision Detection: https://css-tricks.com/collision-detection/, https://stackoverflow.com/questions/4230029/jquery-javascript-collision-detection
--Icons: http://www.classicgaming.cc/classics/frogger/icons
+- Frogger Game Sample: http://www.frogger.net/
+- Collision Detection: https://css-tricks.com/collision-detection/, https://stackoverflow.com/questions/4230029/jquery-javascript-collision-detection
+- Icons: http://www.classicgaming.cc/classics/frogger/icons
