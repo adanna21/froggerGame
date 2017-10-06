@@ -1,5 +1,3 @@
-# froggerGame
-A game of frogger created for class
 *** Adanna Omatu / 10-6-2017 ***
 
 # Pseudo Frogger Proposal
