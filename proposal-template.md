@@ -9,6 +9,7 @@ Frogger is a one player retro game where a frog must cross multiple lanes and a 
 ## Wireframe
 
 (Your wireframes go here. Preferably two or more)
+You need to have wireframes and a filled-out [project proposal template](./proposal-template.md).
 
 ## Initial thoughts on game structure
 
@@ -19,15 +20,23 @@ Frogger is a one player retro game where a frog must cross multiple lanes and a 
 
 | Date        | Event                                                                                                                                                                                                                         |
 |-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 10/6        | **Project Approvals**<br/> You need to have wireframes and a filled-out [project proposal template](./proposal-template.md).                                                                                                      |
-| 10/6-10/9 | **Independent Work**<br/> Weekend!!! Remember, the TAs will be here on Saturday. |
-| 10/10-10/11 | **Independent Work**<br/> You'll work here at GA and have access to the instructional team for support. Your squad leader will be your point of contact for all issues and will meet with you 1:1 at least once during this time.                                                                                                                                                 |
-| 10/12        | **Project Presentations**<br/> Get ready to present your amazing game!                                                                                                                                                            |
-
-
+| 10/6        | **Phase 1: Project Approvals**<br/> Research frogger games, create a mockup, write the proposal, look for jquery guides.                                                                                              |
+| 10/6-10/9 | **Phase 2: Design & Functionality**<br/> Create a design and sketch out everything. Code it, and have it 70% complete. |
+| 10/10-10/11 | **Phase 3: Functionality**<br/> 
+-Collision detection solved
+-Ability to add lives when frogger lands on fly
+-Ability to store name and score into high score page 
+-Ability to remove scores in high scores page based on length
+-Ability to end game if timer runs out
+-Ability to add points if frogger accompanies other frog to other side                                                                                                                                                |
+| 10/12        | **Phase 3:**<br/> 
+-Add prototypes
+-Optimize
+-Push it!                                                                                                                                                            |
 ---
-(The steps or phases you expect to go through, and the tasks that you'll need to accomplish to reach each step. These should resemble the acceptance criteria we were working through earlier.)
 
 ## Links and Resources
 
-(Anything you've looked up so far or are thinking about using.)
+-Frogger Game Sample: http://www.frogger.net/
+-Collision Detection: https://css-tricks.com/collision-detection/, https://stackoverflow.com/questions/4230029/jquery-javascript-collision-detection
+-Icons: http://www.classicgaming.cc/classics/frogger/icons
