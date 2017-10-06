@@ -28,10 +28,10 @@ Frogger is a one player retro game where a frog must cross multiple lanes and a 
 - Ability to remove scores in high scores page based on length
 - Ability to end game if timer runs out
 - Ability to add points if frogger accompanies other frog to other side                                                                                                                                                |
-| 10/12        | **Phase 3:**<br/> 
+| 10/12 | **Phase 3:**<br/> 
 - Add prototypes
 - Optimize
-- Push it!                                                                                                                                                            |
+- Push it!                                                                                                                                     |
 ---
 
 ## Links and Resources
