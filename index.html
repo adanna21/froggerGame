@@ -2,6 +2,8 @@
 <html>
 <head>
   <title></title>
+   <link rel='stylesheet' type='text/css' href='styles/reset.css'>
+  <link rel='stylesheet' type='text/css' href='styles/style.css'>
 </head>
 <body>
 <!--#######################################################################################
@@ -9,6 +11,7 @@
   #######################################################################################-->
 
   <div id="homeContainer">
+    <button id="startBtn" type="start">Start</button>
 
   </div>
 
@@ -16,8 +19,20 @@
   #################################  GAME PAGE   #####################################
   #######################################################################################-->
 
+  <div id="gameContainer">
+    <h1>Frogger</h1>
+    <div id="game-wrapper">
+      <div class="obj lateral-moving" id="truck"></div>
+      <div class="obj lateral-moving" id="redcar"></div>
+      <div class="obj lateral-moving" id="racecar"></div>
+      <div class="obj" id="frog"></div>
+    </div>
+  </div>
+
   <!--#######################################################################################
   #################################  SCORES PAGES ####################################
   #######################################################################################-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="src/main.js"></script>
 </body>
 </html>
