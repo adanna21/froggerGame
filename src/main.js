@@ -38,6 +38,7 @@ let itemConstructor = function(obj) {
     this.cssWidth = parseInt(this.cssObj.css("width"));
     this.cssHeight = parseInt(this.cssObj.css("height"));
     this.posXmin = parseInt(this.cssObj.css('transform').split(',')[4])// returns position X - top left
+    console.log()
     this.posYmin = parseInt(this.cssObj.css('transform').split(',')[5]); // returns position Y - top left
     this.posXmax = this.posXmin + this.cssWidth; // bottom right
     this.posYmax = this.posYmin + this.cssHeight; // bottom right
@@ -97,25 +98,49 @@ $('#startBtn').on('click', function() {
             case 37:
                 frogX -= 30;
                 movingFrog.posXmin = frogX;
+                movingFrog.posXmax = movingFrog.posXmin + movingFrog.cssWidth;
                 console.log(movingFrog.posXmin);
+                // console.log(frogX);
                 $frog.css('transform',`translate3d(${frogX}px, ${frogY}px, 0px)`);  //left
+                areObjsIntersecting(movingFrog, lateralObjsArray);
                 break;
             case 38:
                 frogY -= 30;
-                movingFrog.posYmin = frogX;
+                console.log(frogY);
+                movingFrog.posYmin = frogY;
+                movingFrog.posYmax = movingFrog.posYmin + movingFrog.cssHeight;
+                console.log(movingFrog.posYmin);
                 $frog.css('transform',`translate3d(${frogX}px, ${frogY}px, 0px)`); //up
+                areObjsIntersecting(movingFrog, lateralObjsArray);
                 break;
             case 39:
                 frogX += 30;
                 movingFrog.posXmin = frogX;
+                movingFrog.posXmax = movingFrog.posXmin + movingFrog.cssWidth;
+                console.log(movingFrog.posXmin);
                 $frog.css('transform',`translate3d(${frogX}px, ${frogY}px, 0px)`);  //right
+                areObjsIntersecting(movingFrog, lateralObjsArray);
                 break;
             case 40:
                 frogY += 30;
-                movingFrog.posYmin = frogX;
+                movingFrog.posYmin = frogY;
+                movingFrog.posYmax = movingFrog.posYmin + movingFrog.cssHeight;
                 $frog.css('transform',`translate3d(${frogX}px, ${frogY}px, 0px)`); //down
+                areObjsIntersecting(movingFrog, lateralObjsArray);
                 break;
         }
+        console.log('frog position');
+        console.log(movingFrog.posYmin);
+        console.log(movingFrog.posXmin);
+
+
+        if(areObjsIntersecting(movingFrog, lateralObjsArray)){
+
+            alert("touching");
+        }else{
+            return false;
+        }
+
         window.requestAnimationFrame(moveFrog);
     }
 
@@ -124,12 +149,12 @@ $('#startBtn').on('click', function() {
 
 
     function isRangeIntersecting(frogMin, frogMax, otherMin, otherMax){
-        return Math.max(frogMin, frogMax) >= Math.min(otherMin, otherMax) && Math.min(frogMin, frogMax) <= Math.max(otherMin, otherMax);
+        return Math.max(frogMin, frogMax) >= Math.min(otherMin, otherMax) && Math.min(frogMin,frogMax) <= Math.max(otherMin, otherMax)
         console.log(frogMin);
         console.log(otherMin);
     }
 
-    function areObjsInterecting(frogRange, otherRange){
+    function areObjsIntersecting(frogRange, otherRange){
         let frogXmin = frogRange.posXmin;
         let frogXmax = frogRange.posXmax;
         let frogYmin = frogRange.posYmin;
@@ -141,19 +166,28 @@ $('#startBtn').on('click', function() {
         // let otherYmax = otherRange.posYmax;
 
         for (index in lateralObjsArray) {
-            console.log("other  ", otherRange[index].posYmin)
-            return isRangeIntersecting(frogXmin, frogXmax, otherRange[index].posXmin, otherRange[index].posXmax)
-                &&
-                isRangeIntersecting(frogYmin, frogYmax, otherRange[index].posYmin, otherRange[index].posYmax)
+            // console.log("other  ", otherRange[index].posYmin)
+            return isRangeIntersecting(frogXmin, frogXmax, otherRange[index].posXmin, otherRange[index].posXmax) &&
+                   isRangeIntersecting(frogYmin, frogYmax, otherRange[index].posYmin, otherRange[index].posYmax);
 
+            // let xIntersection = isRangeIntersecting(frogXmin, frogXmax, otherRange[index].posXmin, otherRange[index].posXmax);
+
+            // let yIntersection = isRangeIntersecting(frogYmin, frogYmax, otherRange[index].posYmin, otherRange[index].posYmax);
+
+            // if (xIntersection && yIntersection) {
+            //     alert('touching!!!');
+            //     return true;
+            // }
+            // else {
+            //     // console.log(false);
+            //     return false;
+            // }
         }
 
     }
 
-    if(areObjsInterecting(movingFrog, lateralObjsArray)){
-            alert('we are touching!!');
-        }
+
 
     window.requestAnimationFrame(moveObj);
-    window.requestAnimationFrame(moveFrog);
+    // window.requestAnimationFrame(moveFrog);
 });
