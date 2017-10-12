@@ -225,7 +225,7 @@ let setIntID = setInterval(timer,1000);
             movingFrog.clientRect().y + movingFrog.clientRect().height > car.clientRect().y ) {
 
             // collision detected!
-             if(frogY < 250 && lives !== 0){
+             if(frogY < 245 && lives !== 0){
                 $win.css("visibility", "visible");
                 $winTime.text(`${counter}`);
                 score += counter;
