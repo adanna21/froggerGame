@@ -39,3 +39,20 @@ Frogger is a one player retro game where a frog must cross multiple lanes and a 
 - Frogger Game Sample: http://www.frogger.net/
 - Collision Detection: https://css-tricks.com/collision-detection/, https://stackoverflow.com/questions/4230029/jquery-javascript-collision-detection
 - Icons: http://www.classicgaming.cc/classics/frogger/icons
+
+### Necessary Deliverables
+
+- A **working game, built by you**, hosted on the internet
+- A **git repository hosted on Github.com**, with a link to your hosted game in the URL section, and **frequent** commits dating back to the very beginning of the project
+- **A ``readme.md`` file** which must include:
+  - Explanations of the technologies used
+    - I used jquery, html, and css.
+  - Approach taken
+    - My approach was to create a basic design and then try to get collision detection working before doing anything else.
+  - User stories
+  - Wireframes
+  - How-to-use instructions
+    - Instructions on how to play game? click Play on the first page then click play again, the game will begin. Use the arrow keys to navigate frog. Get to the other side. You keep collecting score.
+  - Unsolved problems
+    - The frog is not able to hop on objects above the water and travel with them. The frog doesn't die if it hits the water. There is no scores page. No disclaimer. The frog doesn't win by landing on a lilypad
+- An [**issue ticket** created on **this repository**](https://git.generalassemb.ly/wdi-nyc-delorean/PROJECT_01-Game/issues/new) that has a link to your GitHub repository and your deployed game. (Also include struggles, wins, comfort, completion, etc.)
