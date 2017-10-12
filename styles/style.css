@@ -247,7 +247,7 @@ body {
   width: 100%;
   transform: scale(1.6);
 }
-#enterName {
+.win-or-loose{
   position: absolute;
   top: 34.5%;
   width: 100%;

@@ -305,8 +305,23 @@ let setIntID = setInterval(timer,1000);
           break;
         } //keyCode end
         //----------------- CONDITIONS IN WATER ---------------//
+        let $win= $('#win');
+        let $winTime= $('#time2');
+
         if(frogY < 250){
-            console.log(`${frogY}`);
+            setTimeout( function(){
+                $win.css("visibility", "visible");
+                $winTime.text(`${counter}`);
+                score += parseInt($winTime.text());
+                $(document).on('keydown', (e) => {moveFrog(e)}).off();
+                setPosition($frog, "245px", "600px", 0);
+                frogX = 245;
+                frogY = 600;
+                counter = 60;
+                },900);
+                $win.css("visibility", "hidden");
+                $(document).on('keydown', (e) => {moveFrog(e)}).off();
+                // location.reload();
         }
     } //moveFrog end
      $(document).on('keydown', (e) => {moveFrog(e)});
