@@ -16,6 +16,7 @@ const mainSong = new Audio('assets/frogger-forever.mp3');
 mainSong.play();
 mainSong.loop = true;
 $('#homeStartBtn').on('click', function(){
+    mainSong.pause();
     $homePage.css("visibility", "hidden");
     $gamePage.css("visibility", "visible");
     // mainSong.pause();
@@ -106,16 +107,14 @@ setPosition($frog, "245px", "600px", 0);
 
 /* Create a constructor that can encompass each item */
 let itemConstructor = function(obj) {
-    console.log('the thing passed into construct ',obj);
     this.cssObj = obj[0];
-    console.log(this.cssObj)
     this.cssWidth = parseInt($(this.cssObj).css("width"));
     this.cssHeight = parseInt($(this.cssObj).css("height"));
     this.posXmin = parseInt($(this.cssObj).css('transform').split(',')[4])// returns position X - left side
     this.posYmin = parseInt($(this.cssObj).css('transform').split(',')[5]); // returns position Y - top
     this.posXmax = this.posXmin + this.cssWidth; // right
     this.posYmax = this.posYmin + this.cssHeight; // bottom
-    this.speed = -2;
+    this.speed = -5;
     this.updateSpeed = function () {
       this.posXmax = this.posXmax + this.speed;
       this.posXmin = this.posXmin + this.speed;
@@ -213,6 +212,10 @@ let setIntID = setInterval(timer,1000);
   let  lives = 2;
   const dieSong = new Audio('assets/frogger-squash.wav');
 
+  let $win= $('#win');
+    let $winTime= $('#time2');
+
+
   let hasCollided = false;
     function checkForCrashFrog(){
       lateralObjsArray.forEach(function(car){
@@ -222,19 +225,21 @@ let setIntID = setInterval(timer,1000);
             movingFrog.clientRect().y + movingFrog.clientRect().height > car.clientRect().y ) {
 
             // collision detected!
-             // if(frogY < 250){
-             //    // movingFrog.clientRect().x  = car.clientRect().x;
-             //    // movingFrog.clientRect().y = car.clientRect().y;
+             if(frogY < 250 && lives !== 0){
+                $win.css("visibility", "visible");
+                $winTime.text(`${counter}`);
+                score += counter;
+                $(document).on('keydown', (e) => {moveFrog(e)}).off();
+                setPosition($frog, "245px", "600px", 0);
+                frogX = 245;
+                frogY = 600;
 
-             //    movingFrog.updateSpeed();
-
-             //    console.log(movingFrog.clientRect().x , movingFrog.clientRect().y )
-             //    $(movingFrog.cssObj).css('z-index', '5');
-             //    $frog.css('transform',`translate3d(${movingFrog.clientRect().x}px, ${movingFrog.clientRect().y}px, 0px)`);
-             //  }else{
-
-
-
+                setTimeout( function(){
+                    counter = 60;
+                    $win.css("visibility", "hidden");
+                    $(document).on('keydown', (e) => {moveFrog(e)});
+                     },800);
+             }else{
             $frog.children("img").attr('src',('images/icons8-Poison-96.png'));
             dieSong.play();
             setTimeout( function(){
@@ -252,6 +257,7 @@ let setIntID = setInterval(timer,1000);
                 }
                 hasCollided = false;
         }//end of if statement
+    }
       })//end of forEach
 
       //----------------- GAME OVER CODE ---------------//
@@ -315,24 +321,9 @@ let setIntID = setInterval(timer,1000);
           break;
         } //keyCode end
         //----------------- CONDITIONS IN WATER ---------------//
-        let $win= $('#win');
-        let $winTime= $('#time2');
 
-        if(frogY < 250){
-            setTimeout( function(){
-                $win.css("visibility", "visible");
-                $winTime.text(`${counter}`);
-                score += parseInt($winTime.text());
-                $(document).on('keydown', (e) => {moveFrog(e)}).off();
-                setPosition($frog, "245px", "600px", 0);
-                frogX = 245;
-                frogY = 600;
-                counter = 60;
-                },900);
-                $win.css("visibility", "hidden");
-                $(document).on('keydown', (e) => {moveFrog(e)}).off();
-                // location.reload();
-        }
+
+
     } //moveFrog end
      $(document).on('keydown', (e) => {moveFrog(e)});
 
