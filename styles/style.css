@@ -140,7 +140,6 @@ body {
   background: url(../images/lilypad.png);
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  border: 1px brown solid;
 }
 /*.log {
   width: 60px;
@@ -156,7 +155,6 @@ body {
   background: url(../images/brown-log-with-green-leaf-th.png);
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  border: 1px brown solid;
 }
 #med-log {
   width: 100px;
@@ -164,7 +162,6 @@ body {
   background: url(../images/brown-log-with-green-leaf-th.png);
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  border: 1px brown solid;
 }
 #long-log {
   width: 170px;
@@ -172,7 +169,6 @@ body {
   background: url(../images/brown-log-with-green-leaf-th.png);
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  border: 1px brown solid;
 }
 #turtle1 {
   width: 80px;
@@ -180,7 +176,6 @@ body {
   background: url(../images/turtles2.png);
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  border: 1px brown solid;
 }
 #turtle2 {
   width: 100px;
@@ -188,7 +183,6 @@ body {
   background: url(../images/turtles3.png);
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  border: 1px brown solid;
 }
 #truck {
   width: 150px;
@@ -196,7 +190,6 @@ body {
   background: url(../images/truck.png);
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  border: 1px brown solid;
 }
 #redcar {
   width: 50px;
@@ -204,7 +197,6 @@ body {
   background: url(../images/redcar.png);
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  border: 1px red solid;
 }
 #racecar {
   width: 50px;
@@ -212,7 +204,6 @@ body {
   background: url(../images/racecar.png);
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  border: 1px yellow solid;
 }
 
 #bulldozer {
@@ -220,7 +211,6 @@ body {
   width: 50px;
   height: 50px;
   background-repeat: no-repeat;
-  border: 1px green solid;
 }
 #bulldozer img {
   width: 100%;
@@ -231,7 +221,6 @@ body {
   width: 50px;
   height: 50px;
   background-repeat: no-repeat;
-  border: 1px green solid;
 }
 #yellow-racecar img {
   width: 100%;
@@ -241,7 +230,6 @@ body {
   width: 40px;
   height: 40px;
   background-repeat: no-repeat;
-  border: 1px green solid;
 }
 #frog img {
   width: 100%;
