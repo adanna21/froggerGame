@@ -6,9 +6,96 @@ body {
 /*####################################################################################*/
 /*###############################   Home Screen   ####################################*/
 /*####################################################################################*/
+#homeContainer {
+  width: 100vw;
+  height: 100vh;
+  /* image from https://www.2ndchanceplay.com/NY/Frogger/*/
+  background-image: url(../images/frogger-background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+  visibility: hidden;
+ /* z-index: 2;*/
+  /*font-family: 'Sigmar One', cursive;*/
+  /*font-family: 'Rancho', cursive;*/
+ /* font-family: 'Ravi Prakash', cursive;*/
 
+}
+#overlay {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .7);
+  position: fixed;
+/*#CCE8CC*/
+}
+#welcome-txt{
+  margin-top: 2%;
+  filter: contrast(300%);
+}
+#frogger-img{
+  position: absolute;
+  width: 35%;
+  height: 35%;
+  background: url(../images/frogger-reaching.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  top: 12%;
+  left: 35%;
+}
+#title {
+  margin-top: 18%;
+  font-family: 'Knewave', cursive;
+  font-size: 70px;
+  white-space: nowrap;
+  color: #00a600;
+  text-shadow: 0 5px 5px #eff200;
+}
+.nav {
+  display: block;
+  margin-left: 40%;
+  margin-bottom: .8%;
+  font-weight: 400;
+  font-family: 'Rancho', cursive;
+  font-size: 30px;
+  text-align: center;
+  width: 250px;
+  cursor: pointer;
+  background-color: transparent;
+  color: #CDDC3A;
+  box-shadow: 0 0px 10px #eff200;
+}
+.nav:hover {
+    /*position: relative;*/
+    box-shadow: 0 3px 30px #eff200;
+    color: #eff200;
+    /*box-shadow: inset 0 0px 20px #eff200;*/
+}
+#homeStartBtn:hover::before{
+    /* image from http://www.classicgaming.cc/classics/frogger/icons*/
+    content: url(../images/frogger-pixel.png);
+    float: left;
+    padding-left: 40px;
+    padding-right: 0px;
+    padding-top: 5px;
+}
 
+#scores:hover::before {
+  font-family: 'FontAwesome';
+  content: "\f123";
+  padding-left: 30px;
+  padding-right: 30px;
+ }
 
+#disclaimer:hover::before {
+  font-family: 'FontAwesome';
+  content: "\f06a";
+  padding-left: 30px;
+  padding-right: 30px;
+ }
+
+#homeStartBtn {
+  margin-top: 3%;
+}
 
 
 /*####################################################################################*/
@@ -16,24 +103,92 @@ body {
 /*####################################################################################*/
 
 #gameContainer {
-
+/* visibility: hidden;*/
+  background-color: rgba(0, 0, 0, .7);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  font-family: 'Knewave', cursive;
+  font-size: 25px;
+}
+#startBtn {
+  float: left;
 }
 #game-wrapper {
   position: relative;
+  left: 28%;
   width: 550px;
-  height: 650px;
+  height: 90%;
   background-color: blue;
   background: url(../images/water-copy.jpg);
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: top;
   /*background-position: center;*/
   overflow: hidden;
+
 }
 .obj {
   position: absolute;
   transform-origin: origin;
   -ms-transform-origin: origin;
   -webkit-transform-origin: origin;
+}
+.lilypad {
+  width: 50px;
+  height: 50px;
+  background: url(../images/lilypad.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  border: 1px brown solid;
+}
+/*.log {
+  width: 60px;
+  height: 40px;
+  background: url(../images/brown-log-with-green-leaf-th.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  border: 1px brown solid;
+}*/
+#small-log {
+  width: 60px;
+  height: 40px;
+  background: url(../images/brown-log-with-green-leaf-th.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  border: 1px brown solid;
+}
+#med-log {
+  width: 100px;
+  height: 40px;
+  background: url(../images/brown-log-with-green-leaf-th.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  border: 1px brown solid;
+}
+#long-log {
+  width: 170px;
+  height: 40px;
+  background: url(../images/brown-log-with-green-leaf-th.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  border: 1px brown solid;
+}
+#turtle1 {
+  width: 80px;
+  height: 50px;
+  background: url(../images/turtles2.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  border: 1px brown solid;
+}
+#turtle2 {
+  width: 100px;
+  height: 50px;
+  background: url(../images/turtles3.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  border: 1px brown solid;
 }
 #truck {
   width: 150px;
@@ -60,15 +215,97 @@ body {
   border: 1px yellow solid;
 }
 
-#frog {
-  width: 60px;
-  height: 60px;
-  background: url(../images/frog.png);
+#bulldozer {
+  /*image from http://learn43.me/tracks/game-design-in-javascript-with-crafty-js/game-design-with-crafty-js-part-5/*/
+  width: 50px;
+  height: 50px;
   background-repeat: no-repeat;
-  background-size: 100% 100%;
   border: 1px green solid;
 }
-
+#bulldozer img {
+  width: 100%;
+  transform: scale(1.6);
+}
+#yellow-racecar {
+  /*image from http://learn43.me/tracks/game-design-in-javascript-with-crafty-js/game-design-with-crafty-js-part-5/*/
+  width: 50px;
+  height: 50px;
+  background-repeat: no-repeat;
+  border: 1px green solid;
+}
+#yellow-racecar img {
+  width: 100%;
+  transform: scale(1.3);
+}
+#frog {
+  width: 40px;
+  height: 40px;
+  background-repeat: no-repeat;
+  border: 1px green solid;
+}
+#frog img {
+  width: 100%;
+  transform: scale(1.6);
+}
+#enterName {
+  position: absolute;
+  top: 34.5%;
+  width: 100%;
+  height: 15%;
+  background-color: rgba(0,0,0, .8);
+  font-size: 35px;
+  padding-top: 15px;
+  font-family: 'Sigmar One', cursive;
+  color: #ee151e;
+  visibility: hidden;
+}
+#nameLabel {
+  padding-left: 0;
+  word-wrap: break-word;
+}
+#name {
+  font-size: 30px;
+  padding-top: 1.5%;
+  padding-left: 1%;
+  width: 350px;
+  background-color: transparent;
+  color: yellow;
+  border: 1px solid blue;
+}
+#nameButton {
+  position: absolute;
+  top: 13%;
+  font-size: 30px;
+  background-color: transparent;
+  font-family: 'Sigmar One', cursive;
+  color: #ee151e;
+  border: 1px solid blue;
+  cursor: pointer;
+}
+#game-labels-wrapper {
+  position: relative;
+  left: 30%;
+  width: 500px;
+  height: 10%;
+  /*background-position: center;*/
+  overflow: hidden;
+}
+#frog-lives {
+  float: left;
+  margin-left: 4%;
+}
+#scoreLable {
+  position: absolute;
+  left: 2%;
+  top: 40%;
+  color: #fff;
+}
+#timeLable {
+  position: absolute;
+  right: 2%;
+  top: 40%;
+  color: #eff200;
+}
 /*####################################################################################*/
 /*###############################   Score Screen   ####################################*/
 /*####################################################################################*/

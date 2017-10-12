@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
+  <title>Frogger Game</title>
    <link rel='stylesheet' type='text/css' href='styles/reset.css'>
   <link rel='stylesheet' type='text/css' href='styles/style.css'>
+  <link href="https://fonts.googleapis.com/css?family=Frijole|Knewave|Rancho|Ravi+Prakash|Sigmar+One" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <!--#######################################################################################
@@ -11,8 +13,14 @@
   #######################################################################################-->
 
   <div id="homeContainer">
-    <button id="startBtn" type="start">Start</button>
-
+    <div id="overlay">
+      <div id="welcome-txt"><img src="images/WELCOMETO.png" alt="welcome text"></div>
+      <h1 id="title">PSEUDO FROGGER</h1>
+      <div id="frogger-img"></div>
+      <button id="homeStartBtn" type="start" class="nav" >Play Game</button>
+      <button id="scores" class="nav">High Scores</button>
+      <button id="disclaimer" type="discl" class="nav">Disclaimer</button>
+    </div>
   </div>
 
 <!--#######################################################################################
@@ -20,13 +28,43 @@
   #######################################################################################-->
 
   <div id="gameContainer">
-    <h1>Frogger</h1>
+    <button id="startBtn" type="play" >Start Game</button>
+    <!-- <button id="playBtn" type="play">Play Game</button> -->
     <div id="game-wrapper">
-      <div class="obj lateral-moving" id="truck"></div>
-      <div class="obj lateral-moving" id="redcar"></div>
-      <div class="obj lateral-moving" id="racecar"></div>
-      <div class="obj" id="frog"></div>
+      <!-- lillypads -->
+      <div class="obj lilypad" id="lilypad1"></div>
+      <div class="obj lilypad" id="lilypad2"></div>
+      <div class="obj lilypad" id="lilypad3"></div>
+      <div class="obj lilypad" id="lilypad4"></div>
+      <div class="obj lilypad" id="lilypad5"></div>
+      <!-- logs and turtles -->
+      <div class="obj lateral-moving right" id="small-log"></div>
+      <div class="obj lateral-moving left" id="turtle1"></div>
+      <div class="obj lateral-moving right" id="med-log"></div>
+      <div class="obj lateral-moving left" id="turtle2"></div>
+      <div class="obj lateral-moving right" id="long-log"></div>
+      <!-- cars and trucks -->
+      <div class="obj lateral-moving left" id="truck"></div>
+      <div class="obj lateral-moving right" id="redcar"></div>
+      <div class="obj lateral-moving left" id="racecar"></div>
+      <div class="obj lateral-moving right" id="bulldozer"><img id="" src="images/bulldozer.png" alt="bulldozer"></div>
+      <div class="obj lateral-moving left" id="yellow-racecar"><img id="" src="images/yellow-racecar.png" alt="yellow-racecar"></div>
+      <div class="obj" id="frog"><img id="" src="images/frog.png" alt="frog"></div>
     </div>
+    <div id="game-labels-wrapper">
+      <div id="frog-lives">
+        <img src="images/frogger-pixel.png" alt="frog1">
+        <img src="images/frogger-pixel.png" alt="frog2">
+        <img src="images/frogger-pixel.png" alt="frog3">
+      </div>
+      <p id="scoreLable"> SCORE: <span id="score">0</span></p>
+      <p id="timeLable"><span id="time">60</span> :TIME</p>
+   </div>
+  </div>
+  <div id="enterName">
+      <label for="name" id="nameLabel">ENTER YOUR NAME: </label>
+      <input type="text" id="name" name="yourName">
+      <button id="nameButton" type="button">OK</button>
   </div>
 
   <!--#######################################################################################
