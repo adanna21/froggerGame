@@ -8,9 +8,17 @@ const $homePage = $('#homeContainer');
 //get start button
 const $play = $('#homeStartBtn');
 
+const mainSong = new Audio('assets/frogger-forever.mp3');
+
+
+
+//play mainsong
+mainSong.play();
+mainSong.loop = true;
 $('#homeStartBtn').on('click', function(){
-    $homePage.hide();
+    $homePage.css("visibility", "hidden");
     $gamePage.css("visibility", "visible");
+    // mainSong.pause();
 })
 
 
@@ -38,7 +46,6 @@ window.requestAnimationFrame = window.requestAnimationFrame ||
 
 
 // SET VARIABLES
-const $startBtn = $('#startBtn')
 const $objects = $('.obj');
 //lillys
 const $lilly1 = $('#lilypad1');
@@ -130,12 +137,12 @@ $lateralObjs.each(function(index) {
     lateralObjsArray.push(new itemConstructor($(this)));
 });
 
-$('#startBtn').on('click', startGame);
+$('#homeStartBtn').on('click', startGame);
 
 
 function startGame(){
 //diables continuous clicking of start button
-$('#startBtn').on('click', startGame).off();
+$('#homeStartBtn').on('click', startGame).off();
 
 //set the interval for timer on page
 let setIntID = setInterval(timer,1000);
@@ -185,6 +192,7 @@ let setIntID = setInterval(timer,1000);
       timeDisplayed.text(`${counter}`);
       //check if time is  has run out, if so remove a life
       if(counter === 0){
+        dieSong.play();
         lives--;
         $frogImages[lives].remove();
         setPosition($frog, "245px", "600px", 0);
@@ -203,6 +211,8 @@ let setIntID = setInterval(timer,1000);
   let $frogImages = $('#frog-lives img');
   let $frogLivesChildren = $('#frog-lives').children();
   let  lives = 2;
+  const dieSong = new Audio('assets/frogger-squash.wav');
+
   let hasCollided = false;
     function checkForCrashFrog(){
       lateralObjsArray.forEach(function(car){
@@ -212,20 +222,21 @@ let setIntID = setInterval(timer,1000);
             movingFrog.clientRect().y + movingFrog.clientRect().height > car.clientRect().y ) {
 
             // collision detected!
-             if(frogY < 250){
-                // movingFrog.clientRect().x  = car.clientRect().x;
-                // movingFrog.clientRect().y = car.clientRect().y;
+             // if(frogY < 250){
+             //    // movingFrog.clientRect().x  = car.clientRect().x;
+             //    // movingFrog.clientRect().y = car.clientRect().y;
 
-                movingFrog.updateSpeed();
+             //    movingFrog.updateSpeed();
 
-                console.log(movingFrog.clientRect().x , movingFrog.clientRect().y )
-                $(movingFrog.cssObj).css('z-index', '5');
-                $frog.css('transform',`translate3d(${movingFrog.clientRect().x}px, ${movingFrog.clientRect().y}px, 0px)`);
-              }else{
+             //    console.log(movingFrog.clientRect().x , movingFrog.clientRect().y )
+             //    $(movingFrog.cssObj).css('z-index', '5');
+             //    $frog.css('transform',`translate3d(${movingFrog.clientRect().x}px, ${movingFrog.clientRect().y}px, 0px)`);
+             //  }else{
 
 
 
             $frog.children("img").attr('src',('images/icons8-Poison-96.png'));
+            dieSong.play();
             setTimeout( function(){
                 $frog.children("img").attr('src',('images/frog.png'))
                 //remove a frog life
@@ -240,7 +251,6 @@ let setIntID = setInterval(timer,1000);
                     lives--;
                 }
                 hasCollided = false;
-}
         }//end of if statement
       })//end of forEach
 

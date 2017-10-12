@@ -14,7 +14,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   position: fixed;
-  visibility: hidden;
+  visibility: visible;
  /* z-index: 2;*/
   /*font-family: 'Sigmar One', cursive;*/
   /*font-family: 'Rancho', cursive;*/
@@ -103,7 +103,7 @@ body {
 /*####################################################################################*/
 
 #gameContainer {
-/* visibility: hidden;*/
+ visibility: hidden;
   background-color: rgba(0, 0, 0, .7);
   width: 100vw;
   height: 100vh;
