@@ -26,8 +26,8 @@ app.get('/', function (req, res) {
 })
 
 /* importing routes */
-const scoreRoutes = require('./routes/score-routes')
-app.use('/scores', scoreRoutes)
+const userRoutes = require('./routes/user-routes')
+app.use('/users', userRoutes)
 
 /* handling 404 */
 app.get('*', function (req, res) {
