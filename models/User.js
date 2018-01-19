@@ -14,10 +14,10 @@ User.create = user => {
   return db.one(
     `
       INSERT INTO users
-      (score)
-      VALUES ($1) RETURNING *
+      (name, score)
+      VALUES ($1, $2) RETURNING *
     `,
-    [user.score]
+    [user.name, user.score]
   )
 }
 
@@ -25,10 +25,11 @@ User.update = (user, id) => {
   return db.none(
     `
       UPDATE users SET
-      score = $1,
-      WHERE id = $2
+      name = $1,
+      score = $2,
+      WHERE id = $3
     `,
-    [user.score, id]
+    [user.name, user.score, id]
   )
 }
 
