@@ -35,6 +35,7 @@ usersController.show = (req, res) => {
 
 usersController.create = (req, res) => {
   User.create({
+    name: req.body.name,
     score: req.body.score
   })
   .then(user => {
@@ -52,6 +53,7 @@ usersController.create = (req, res) => {
 
 usersController.update = (req, res) => {
   User.update({
+    name: req.body.name,
     score: req.body.score
   }, req.params.id)
   .then(user => {
