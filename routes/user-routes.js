@@ -1,15 +1,15 @@
 const express = require('express')
-const scoresController = require('../controllers/scores-controller')
+const usersController = require('../controllers/users-controller')
 
-const scoreRoutes = express.Router()
+const userRoutes = express.Router()
 
-console.log('score routes')
+console.log('user routes')
 
-scoreRoutes.get('/', scoresController.index)
-scoreRoutes.get('/:id', scoresController.show)
+userRoutes.get('/', usersController.index)
+userRoutes.get('/:id', usersController.show)
 
-scoreRoutes.post('/', scoresController.create)
-scoreRoutes.put('/:id', scoresController.update)
-scoreRoutes.delete('/:id', scoresController.destroy)
+userRoutes.post('/', usersController.create)
+userRoutes.put('/:id', usersController.update)
+userRoutes.delete('/:id', usersController.destroy)
 
-module.exports = scoreRoutes
+module.exports = userRoutes
