@@ -103,7 +103,11 @@ body {
 /*####################################################################################*/
 
 #gameContainer, #scoresContainer {
- visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center;
+  justify-content: center; */
+  display: none;
   background-color: rgba(0, 0, 0, .7);
   width: 100vw;
   height: 100vh;
@@ -111,17 +115,18 @@ body {
   font-family: 'Knewave', cursive;
   font-size: 25px;
 }
-#startBtn {
+/* #startBtn {
   float: left;
-}
+} */
 #game-wrapper, #score-wrapper {
-  position: relative;
-  left: 28%;
-  width: 550px;
-  height: 90%;
-  background-color: blue;
+  margin-top: 20px;
+  /* position: relative;
+  left: 28%; */
+  /* width: 550px;
+  height: 90%; */
+  background-color: lightgray;
   background: url(../images/water-copy.jpg);
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: top;
   /*background-position: center;*/
@@ -245,7 +250,7 @@ body {
   padding-top: 15px;
   font-family: 'Sigmar One', cursive;
   color: #ee151e;
-  visibility: hidden;
+  display: none;
 }
 #nameLabel {
   padding-left: 0;

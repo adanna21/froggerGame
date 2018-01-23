@@ -28,27 +28,28 @@
   #######################################################################################-->
 
   <div id="gameContainer">
-    <div id="game-wrapper">
+      <canvas id="game-wrapper" width="550" height="570"></canvas>
+    <!-- <div id="game-wrapper"> -->
       <!-- lillypads -->
-      <div class="obj lilypad" id="lilypad1"></div>
+      <!-- <div class="obj lilypad" id="lilypad1"></div>
       <div class="obj lilypad" id="lilypad2"></div>
       <div class="obj lilypad" id="lilypad3"></div>
       <div class="obj lilypad" id="lilypad4"></div>
-      <div class="obj lilypad" id="lilypad5"></div>
+      <div class="obj lilypad" id="lilypad5"></div> -->
       <!-- logs and turtles -->
-      <div class="obj lateral-moving right" id="small-log"></div>
+      <!-- <div class="obj lateral-moving right" id="small-log"></div>
       <div class="obj lateral-moving left" id="turtle1"></div>
       <div class="obj lateral-moving right" id="med-log"></div>
       <div class="obj lateral-moving left" id="turtle2"></div>
-      <div class="obj lateral-moving right" id="long-log"></div>
+      <div class="obj lateral-moving right" id="long-log"></div> -->
       <!-- cars and trucks -->
-      <div class="obj lateral-moving left" id="truck"></div>
+      <!-- <div class="obj lateral-moving left" id="truck"></div>
       <div class="obj lateral-moving right" id="redcar"></div>
       <div class="obj lateral-moving left" id="racecar"></div>
       <div class="obj lateral-moving right" id="bulldozer"><img id="" src="images/bulldozer.png" alt="bulldozer"></div>
       <div class="obj lateral-moving left" id="yellow-racecar"><img id="" src="images/yellow-racecar.png" alt="yellow-racecar"></div>
       <div class="obj" id="frog"><img id="" src="images/frog.png" alt="frog"></div>
-    </div>
+    </div> -->
     <div id="game-labels-wrapper">
       <div id="frog-lives">
         <img src="images/frogger-pixel.png" alt="frog1">
@@ -57,8 +58,9 @@
       </div>
       <p id="scoreLable"> SCORE: <span id="score">0</span></p>
       <p id="timeLable"><span id="time">60</span> :TIME</p>
-   </div>
+    </div>
   </div>
+  
   <div id="enterName" class="win-or-loose">
       <label for="name" id="nameLabel">ENTER YOUR NAME: </label>
       <input type="text" id="name" name="yourName">
@@ -71,9 +73,6 @@
   #######################################################################################-->
   <div id="scoresContainer">
     <div id="score-wrapper">
-      <div id="score-overlay">
-        
-      </div>
     </div>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
