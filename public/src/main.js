@@ -106,7 +106,7 @@ function drawFrog () {
 }
 
 function moveFrog () {
-  if (upPressed === true && up === true) {
+  if (upPressed === true && up === true && y > -10) {
     // ctx.rotate(.5)
     y -= 10
     up = false
@@ -114,21 +114,21 @@ function moveFrog () {
     up = true
   }
 
-  if (downPressed === true && down === true) {
+  if (downPressed === true && down === true && y < 530) {
     y += 10
     down = false
   } else if (downPressed === false) {
     down = true
   }
 
-  if (rightPressed === true && right === true) {
+  if (rightPressed === true && right === true && x < 515) {
     x += 10
     right = false
   } else if (rightPressed === false) {
     right = true
   }
 
-  if (leftPressed === true && left === true) {
+  if (leftPressed === true && left === true && x > -15) {
     x -= 10
     left = false
   } else if (leftPressed === false) {
@@ -151,11 +151,11 @@ let ItemConstructor = function (obj, width, height, speed, x, y) {
 }
 
 // initate constructors
-let truckObj = new ItemConstructor(truck, 140, 40, 1, 225, 475)
-let redcarObj = new ItemConstructor(redcar, 40, 35, 5, 220, 380)
-let racecarObj = new ItemConstructor(racecar, 55, 40, 5, 280, 310)
-let bulldozerObj = new ItemConstructor(bulldozer, 75, 70, 5, 60, 410)
-let yellowRacecarObj = new ItemConstructor(yellowRacecar, 70, 70, 5, 100, 260)
+let truckObj = new ItemConstructor(truck, 140, 40, 1.5, 225, 270)
+let redcarObj = new ItemConstructor(redcar, 40, 35, 3, 220, 380)
+let racecarObj = new ItemConstructor(racecar, 55, 40, 4, 280, 320)
+let bulldozerObj = new ItemConstructor(bulldozer, 75, 70, 3, 60, 410)
+let yellowRacecarObj = new ItemConstructor(yellowRacecar, 70, 70, 3, 100, 460)
 lateralObjsArray.push(truckObj, redcarObj, racecarObj, bulldozerObj, yellowRacecarObj)
 
 function drawCars () {
@@ -166,17 +166,36 @@ function drawCars () {
 }
 
 function moveCars () {
+  // truck
   if (truckObj.x > 0) {
     truckObj.x -= truckObj.speed
   } else {
-    truckObj.x = 600
+    truckObj.x = 700
   }
-
-  // if (truckObj.x > 0 || ) {
-  //   truckObj.x -= truckObj.speed
-  // } else {
-  //   truckObj.x = 600
-  // }
+  // redcar
+  if (redcarObj.x > 0) {
+    redcarObj.x -= redcarObj.speed
+  } else {
+    redcarObj.x = 700
+  }
+  // yellowcar
+  if (yellowRacecarObj.x > 0) {
+    yellowRacecarObj.x -= yellowRacecarObj.speed
+  } else {
+    yellowRacecarObj.x = 700
+  }
+  // bulldozer
+  if (bulldozerObj.x < canvas.width + 100) {
+    bulldozerObj.x += bulldozerObj.speed
+  } else {
+    bulldozerObj.x = -200
+  }
+  // racecar
+  if (racecarObj.x < canvas.width + 100) {
+    racecarObj.x += racecarObj.speed
+  } else {
+    racecarObj.x = -100
+  }
 }
 
 // ----------------- COLLISION DETECTION---------------//
