@@ -45,31 +45,55 @@ const canvas = document.getElementById('game-wrapper')
 const ctx = canvas.getContext('2d')
 
 // ----------------- SET SPRITE VARIBLES & IMAGES ---------------//
+var Images = new function() {
+  // IMAGES
+  this.frog = new Image()
+  this.truck = new Image()
+  this.redcar = new Image()
+  this.racecar = new Image()
+  this.bulldozer = new Image()
+  this.yellowRacecar = new Image()
 
-// FROG
-const frog = new Image()
-frog.src = '../images/frog.png'
+	// Ensure all images have loaded before starting the game
+  var numImages = 6
+  var numLoaded = 0
+  function imageLoaded() {
+  numLoaded++;
+  if (numLoaded === numImages) {
+  window.onload = draw()
+}
+}
+  this.frog.onload = function () {
+  imageLoaded()
+}
+  this.truck.onload = function () {
+  imageLoaded()
+}
+  this.redcar .onload = function () {
+  imageLoaded()
+}
+  this.racecar.onload = function () {
+  imageLoaded()
+}
+  this.bulldozer.onload = function () {
+  imageLoaded()
+}
+  this.yellowRacecar.onload = function () {
+    imageLoaded()
+  }
+	// Set images src;
+  this.frog.src = '../images/frog.png'
+  this.truck.src = '../images/truck.png'
+  this.redcar.src = '../images/redcar.png'
+  this.racecar.src = '../images/racecar.png'
+  this.bulldozer.src = '../images/bulldozer.png'
+  this.yellowRacecar.src = '../images/yellow-racecar.png'
+}
+
 let x = 225
 let y = 510
 let width = 50
 let height = 50
-
-// VECHICLES
-let truck = new Image()
-truck.src = '../images/truck.png'
-
-let redcar = new Image()
-redcar.src = '../images/redcar.png'
-
-let racecar = new Image()
-racecar.src = '../images/racecar.png'
-
-let bulldozer = new Image()
-bulldozer.src = '../images/bulldozer.png'
-
-let yellowRacecar = new Image()
-yellowRacecar.src = '../images/yellow-racecar.png'
-
 // ----------------- MOVE FROG ---------------//
 // KEY PRESS
 // key monitor
@@ -102,7 +126,7 @@ function keyDownHandler (e) {
 }
 
 function drawFrog () {
-  ctx.drawImage(frog, x, y, width, height)
+  ctx.drawImage(Images.frog, x, y, width, height)
 }
 
 function moveFrog () {
@@ -151,11 +175,11 @@ let ItemConstructor = function (obj, width, height, speed, x, y) {
 }
 
 // initate constructors
-let truckObj = new ItemConstructor(truck, 140, 40, 1.5, 225, 270)
-let redcarObj = new ItemConstructor(redcar, 40, 35, 3, 220, 380)
-let racecarObj = new ItemConstructor(racecar, 55, 40, 4, 280, 320)
-let bulldozerObj = new ItemConstructor(bulldozer, 75, 70, 3, 60, 410)
-let yellowRacecarObj = new ItemConstructor(yellowRacecar, 70, 70, 3, 100, 460)
+let truckObj = new ItemConstructor(Images.truck, 140, 40, 1.5, 225, 270)
+let redcarObj = new ItemConstructor(Images.redcar, 40, 35, 3, 220, 380)
+let racecarObj = new ItemConstructor(Images.racecar, 55, 40, 4, 280, 320)
+let bulldozerObj = new ItemConstructor(Images.bulldozer, 75, 70, 3, 60, 410)
+let yellowRacecarObj = new ItemConstructor(Images.yellowRacecar, 60, 60, 3, 100, 460)
 lateralObjsArray.push(truckObj, redcarObj, racecarObj, bulldozerObj, yellowRacecarObj)
 
 function drawCars () {
@@ -199,18 +223,36 @@ function moveCars () {
 }
 
 // ----------------- COLLISION DETECTION---------------//
-function hasCollided () {
-  // if (truckX <= x + 50 &&
-  //     truckX + 140 >= x &&
-  //     truckY + 40 >= y &&
-  //     truckY <= y + 50) {
-  //   y = 510
-  // }
+// var pixelMap = []
+// function mapPixels () {
+//   for( var i = 0; i < truckObj.width; i++ ) {
+//   for( var j = 0; j < truckObj.height; j++ ) {
+// 	// Fetch pixel at current position
+//     var pixel = ctx.getImageData( j, i, 1, 1 )
+//     console.log(pixel.data)
+// 	// Check that opacity is above zero
+//     if( pixel.data[3] != 0 ) {
+//       pixelMap.push( { x:j, y:i } )
+//     }
+//   }
+// }
+//   console.log(pixelMap)
+// }
 
-  // movingFrog.clientRect().x < car.clientRect().x + car.clientRect().width &&
-//             movingFrog.clientRect().x + movingFrog.clientRect().width > car.clientRect().x &&
-//             movingFrog.clientRect().y < car.clientRect().y + car.clientRect().height &&
-//             movingFrog.clientRect().y + movingFrog.clientRect().height > car.clientRect().y)
+function hasCollided () {
+  lateralObjsArray.forEach(elem => {
+    if (elem.x < x + width  && elem.x + elem.width  > x &&
+      elem.y < y + height && elem.y + elem.height > y) {
+  // The objects are touching
+     y = 510
+  }
+    // if (elem.x <= x + width &&
+    //   elem.x + elem.width >= x &&
+    //   elem.y + elem.height >= y &&
+    //   elem.y <= y + height) {
+    //   y = 510
+    // }
+  })
 }
 
 // REQUEST ANIMATION FRAME
@@ -224,7 +266,6 @@ function draw () {
   hasCollided()
   requestAnimationFrame(draw)
 }
-draw()
 
 // SET VARIABLES
 const $objects = $('.obj')
