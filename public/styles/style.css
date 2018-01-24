@@ -119,7 +119,7 @@ body {
   float: left;
 } */
 #game-wrapper, #score-wrapper {
-  margin-top: 20px;
+  margin-top: 10px;
   /* position: relative;
   left: 28%; */
   /* width: 550px;
@@ -277,11 +277,15 @@ body {
 }
 #game-labels-wrapper {
   position: relative;
-  left: 30%;
-  width: 500px;
-  height: 10%;
+  /* left: 30vw; */
+  /* padding-left: 10%; */
+  /* padding-right: 10%; */
+  width: 550px;
+  height: 100px;
+  background-color: #00a600;
   /*background-position: center;*/
   overflow: hidden;
+  /* display: flex; */
 }
 #frog-lives {
   float: left;

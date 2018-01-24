@@ -46,6 +46,7 @@ const canvas = document.getElementById('game-wrapper')
 const ctx = canvas.getContext('2d')
 
 // ----------------- SET SPRITE VARIBLES & IMAGES ---------------//
+// LOAD ALL IMAGES IN ONE OBJECT
 var Images = new function() {
   // IMAGES
   this.frog = new Image()
@@ -55,13 +56,12 @@ var Images = new function() {
   this.bulldozer = new Image()
   this.yellowRacecar = new Image()
   this.log = new Image()
-  // this.medLog = new Image()
-  // this.bigLog = new Image()
-  // this.twoTurtle = new Image()
-  // this.threeTurtle = new Image()
+  this.pad = new Image()
+  this.twoTurtles = new Image()
+  this.threeTurtles = new Image()
 
 	// Ensure all images have loaded before starting the game
-  var numImages = 6
+  var numImages = 9
   var numLoaded = 0
   
   function imageLoaded () {
@@ -93,6 +93,15 @@ var Images = new function() {
   this.log.onload = function () {
     imageLoaded()
   }
+  this.twoTurtles.onload = function () {
+    imageLoaded()
+  }
+  this.threeTurtles.onload = function () {
+    imageLoaded()
+  }
+  this.pad.onload = function () {
+    imageLoaded()
+  }
 
 	// Set images src;
   this.frog.src = '../images/frog.png'
@@ -102,13 +111,16 @@ var Images = new function() {
   this.bulldozer.src = '../images/bulldozer.png'
   this.yellowRacecar.src = '../images/yellow-racecar.png'
   this.log.src = '../images/brown-log.png'
+  this.twoTurtles.src = '../images/turtles2.png'
+  this.threeTurtles.src = '../images/turtles3.png'
+  this.pad.src = '../images/lilypad.png'
 }
 
 let x = 225
 // let y = 520
 let y = 230
-let width = 30
-let height = 30
+let width = 25
+let height = 25
 // ---------------------------- MOVE FROG ----------------------//
 // KEY PRESS
 // key monitor
@@ -148,28 +160,28 @@ function drawFrog () {
 function moveFrog () {
   if (upPressed === true && up === true && y > -10) {
     // ctx.rotate(.5)
-    y -= 10
+    y -= 15
     up = false
   } else if (upPressed === false) {
     up = true
   }
 
   if (downPressed === true && down === true && y < 530) {
-    y += 10
+    y += 15
     down = false
   } else if (downPressed === false) {
     down = true
   }
 
   if (rightPressed === true && right === true && x < 515) {
-    x += 10
+    x += 15
     right = false
   } else if (rightPressed === false) {
     right = true
   }
 
   if (leftPressed === true && left === true && x > -15) {
-    x -= 10
+    x -= 15
     left = false
   } else if (leftPressed === false) {
     left = true
@@ -179,10 +191,11 @@ function moveFrog () {
 // ---------------------- MOVE CARS------------------------//
 // array of vehicle and water objects
 let landObjsArr = []
-let waterObjsArr = []
+let floatingObjsArr = []
+let padObjsArr = []
 
 // constructor to easily draw vehicles & other objs
-let ItemConstructor = function (obj, width, height, speed, x, y) {
+let ItemConstructor = function (obj, width, height, speed, x, y, onPad) {
   this.obj = obj
   this.width = width
   this.height = height
@@ -190,9 +203,10 @@ let ItemConstructor = function (obj, width, height, speed, x, y) {
   this.y = y
   this.speed = speed
   this.imageData = ctx.getImageData(this.x, this.y, this.width, this.height)
+  this.onPad = false
 }
 
-// initate constructor varaibles
+// initiate constructor varaibles
 let frogObj
 let truckObj
 let redcarObj
@@ -200,26 +214,55 @@ let racecarObj
 let bulldozerObj
 let yellowRacecarObj
 let tinyLogObj
+let tinyLog2Obj
 let medLogObj
+let medLog2Obj
 let bigLogObj
+let bigLog2Obj
+let twoTurtlesObj
+let twoTurtles2Obj
+let threeTurtlesObj
+let threeTurtles2Obj
+let padObj
+let pad2Obj
+let pad3Obj
+let pad4Obj
+let pad5Obj
 
 function postionObjs () {
   // initate land objects
   frogObj = new ItemConstructor(Images.frog, 30, 30, 225, 520)
-  truckObj = new ItemConstructor(Images.truck, 140, 45, 1.5, 225, 270)
-  redcarObj = new ItemConstructor(Images.redcar, 50, 34, 3, 220, 380)
-  racecarObj = new ItemConstructor(Images.racecar, 50, 50, 4, 280, 320)
-  bulldozerObj = new ItemConstructor(Images.bulldozer, 50, 45, 3, 60, 410)
-  yellowRacecarObj = new ItemConstructor(Images.yellowRacecar, 55, 48, 3, 100, 470)
+  truckObj = new ItemConstructor(Images.truck, 140, 45, 1.5, 225, 290)
+  redcarObj = new ItemConstructor(Images.redcar, 50, 34, 3, 220, 400)
+  racecarObj = new ItemConstructor(Images.racecar, 50, 50, 4, 280, 340)
+  bulldozerObj = new ItemConstructor(Images.bulldozer, 50, 45, 3, 60, 440)
+  yellowRacecarObj = new ItemConstructor(Images.yellowRacecar, 55, 48, 3, 100, 495)
 
   landObjsArr.push(truckObj, redcarObj, racecarObj, bulldozerObj, yellowRacecarObj)
 
   // initiate water objs
-  tinyLogObj = new ItemConstructor(Images.log, 60, 35, 1.9, 300, 130)
-  medLogObj = new ItemConstructor(Images.log, 80, 35, 1.9, 100, 80)
-  bigLogObj = new ItemConstructor(Images.log, 100, 35, 1.7, 225, 0)
+  tinyLogObj = new ItemConstructor(Images.log, 60, 30, 1.6, 500, 155)
+  tinyLog2Obj = new ItemConstructor(Images.log, 60, 30, 1.6, 40, 155)
+  medLogObj = new ItemConstructor(Images.log, 80, 30, 1.3, 0, 115)
+  medLog2Obj = new ItemConstructor(Images.log, 80, 30, 1.3, 450, 115)
+  bigLogObj = new ItemConstructor(Images.log, 100, 30, 1.6, 300, 50)
+  bigLog2Obj = new ItemConstructor(Images.log, 100, 30, 1.6, 25, 50)
+  twoTurtlesObj = new ItemConstructor(Images.twoTurtles, 75, 35, -1.4, 450, 80)
+  twoTurtles2Obj = new ItemConstructor(Images.twoTurtles, 75, 35, -1.4, 50, 80)
+  threeTurtlesObj = new ItemConstructor(Images.threeTurtles, 110, 26, -1.4, 120, 200)
+  threeTurtles2Obj = new ItemConstructor(Images.threeTurtles, 110, 26, -1.4, 400, 200)
 
-  waterObjsArr.push(tinyLogObj, medLogObj, bigLogObj)
+  floatingObjsArr.push(tinyLogObj, medLogObj, bigLogObj, twoTurtlesObj, tinyLog2Obj, medLog2Obj, bigLog2Obj,threeTurtlesObj, twoTurtles2Obj, threeTurtles2Obj)
+
+  // initiate pad objs
+  padObj = new ItemConstructor(Images.pad, 35, 30, 1.7, 30, 0)
+  pad2Obj = new ItemConstructor(Images.pad, 35, 30, 1.7, 140, 0)
+  pad3Obj = new ItemConstructor(Images.pad, 35, 30, 1.7, 250, 0)
+  pad4Obj = new ItemConstructor(Images.pad, 35, 30, 1.7, 360, 0)
+  pad5Obj = new ItemConstructor(Images.pad, 35, 30, 1.7, 470, 0)
+
+  padObjsArr.push(padObj, pad2Obj, pad3Obj, pad4Obj, pad5Obj)
+  console.log(pad5Obj.onPad)
 }
 
 function drawCars () {
@@ -232,19 +275,19 @@ function drawCars () {
 
 function moveCars () {
   // truck
-  if (truckObj.x > 0) {
+  if (truckObj.x > -100) {
     truckObj.x -= truckObj.speed
   } else {
     truckObj.x = 700
   }
   // redcar
-  if (redcarObj.x > 0) {
+  if (redcarObj.x > -100) {
     redcarObj.x -= redcarObj.speed
   } else {
     redcarObj.x = 700
   }
   // yellowcar
-  if (yellowRacecarObj.x > 0) {
+  if (yellowRacecarObj.x > -100) {
     yellowRacecarObj.x -= yellowRacecarObj.speed
   } else {
     yellowRacecarObj.x = 700
@@ -301,37 +344,73 @@ function pixelCollision (elem) {
 
 // ---------------------- MOVE LOGS & TURTLES------------------------//
 
-function drawLogs () {
-  waterObjsArr.forEach(elem => {
+function drawLogsTurtles () {
+  floatingObjsArr.forEach(elem => {
     ctx.drawImage(elem.obj, elem.x, elem.y, elem.width, elem.height)
-    // elem.imageData = ctx.getImageData(elem.x, elem.y, elem.width, elem.height)
+    elem.imageData = ctx.getImageData(elem.x, elem.y, elem.width, elem.height)
   })
 }
 
-function moveLogs () {
+function moveLogsTurtles () {
   // tinylog
   if (tinyLogObj.x < canvas.width + 100) {
     tinyLogObj.x += tinyLogObj.speed
-  } else {
-    tinyLogObj.x = -100
+    } else {
+      tinyLogObj.x = -100
+  }
+  if (tinyLog2Obj.x < canvas.width + 100) {
+    tinyLog2Obj.x += tinyLog2Obj.speed
+    } else {
+      tinyLog2Obj.x = -100
   }
   // medlog
   if (medLogObj.x < canvas.width + 100) {
-    medLogObj.x += medLogObj.speed
-  } else {
-    medLogObj.x = -100
+      medLogObj.x += medLogObj.speed
+    } else {
+      medLogObj.x = -100
+  }
+  if (medLog2Obj.x < canvas.width + 100) {
+      medLog2Obj.x += medLog2Obj.speed
+    } else {
+      medLog2Obj.x = -100
   }
   // biglog
   if (bigLogObj.x < canvas.width + 100) {
-    bigLogObj.x += bigLogObj.speed
-  } else {
-    bigLogObj.x = -100
+      bigLogObj.x += bigLogObj.speed
+    } else {
+      bigLogObj.x = -100
+  }
+  if (bigLog2Obj.x < canvas.width + 100) {
+      bigLog2Obj.x += bigLog2Obj.speed
+    } else {
+      bigLog2Obj.x = -100
+  }
+  // turtles
+  if (twoTurtlesObj.x > -100) {
+      twoTurtlesObj.x += twoTurtlesObj.speed
+    } else {
+      twoTurtlesObj.x = 700
+  }
+  if (twoTurtles2Obj.x > -100) {
+      twoTurtles2Obj.x += twoTurtles2Obj.speed
+    } else {
+      twoTurtles2Obj.x = 700
+  }
+  if (threeTurtlesObj.x > -100) {
+      threeTurtlesObj.x += threeTurtlesObj.speed
+    } else {
+      threeTurtlesObj.x = 700
+  }
+  if (threeTurtles2Obj.x > -100) {
+      threeTurtles2Obj.x += threeTurtles2Obj.speed
+    } else {
+      threeTurtles2Obj.x = 700
   }
 }
 
 function float () {
   if (y < 230) {
-    waterObjsArr.forEach(elem => {
+    floatingObjsArr.forEach(elem => {
       if (elem.x <= x + width &&
         elem.x + elem.width >= x &&
         elem.y + elem.height >= y &&
@@ -340,7 +419,6 @@ function float () {
             x += elem.speed
             console.log('detected!!!')
           }
-          
           // y = 530
           // pixelCollision(elem)
       }
@@ -348,16 +426,47 @@ function float () {
   }
 }
 
+// ---------------------- PADS------------------------//
+function drawPads () {
+  padObjsArr.forEach(elem => {
+    ctx.drawImage(elem.obj, elem.x, elem.y, elem.width, elem.height)
+    elem.imageData = ctx.getImageData(elem.x, elem.y, elem.width, elem.height)
+  })
+}
+
+function onPad () {
+  if (y < 230) {
+    padObjsArr.forEach(elem => {
+      if (elem.x <= x + width &&
+        elem.x + elem.width >= x &&
+        elem.y + elem.height >= y &&
+        elem.y <= y + height) {
+          elem.onPad = true
+          y = 530
+          x = 225
+          console.log('onpad!!!')
+      }
+    })
+  }
+
+  padObjsArr.forEach(elem => {
+    if(elem.onPad === true) {
+      ctx.drawImage(Images.frog, elem.x, elem.y, width, height)
+    }
+  })
+}
 // REQUEST ANIMATION FRAME
 function draw () {
   // stop images from repeating as they move
   ctx.clearRect(0, 0, canvas.width, canvas.height)
-  drawLogs()
+  drawPads()
+  drawLogsTurtles()
   drawFrog()
   moveFrog()
   drawCars()
   // moveCars()
-  moveLogs()
+  moveLogsTurtles()
+  onPad()
   float()
   carCollided()
   requestAnimationFrame(draw)
@@ -379,13 +488,13 @@ const $smallLog = $('#small-log')
 const $medLog = $('#med-log')
 const $longLog = $('#long-log')
 // cars
-const $lateralObjs = $('.lateral-moving')
-const $truck = $('#truck')
-const $redcar = $('#redcar')
-const $racecar = $('#racecar')
-const $bulldozer = $('#bulldozer')
-const $yellowRacecar = $('#yellow-racecar')
-const $frog = $('#frog')
+// const $lateralObjs = $('.lateral-moving')
+// const $truck = $('#truck')
+// const $redcar = $('#redcar')
+// const $racecar = $('#racecar')
+// const $bulldozer = $('#bulldozer')
+// const $yellowRacecar = $('#yellow-racecar')
+// const $frog = $('#frog')
 
 // Set initial position of all items
 // function setPosition (obj, x, y, z) {

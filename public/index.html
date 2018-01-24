@@ -28,7 +28,7 @@
   #######################################################################################-->
 
   <div id="gameContainer">
-      <canvas id="game-wrapper" width="550" height="570"></canvas>
+      <canvas id="game-wrapper" width="550" height="600"></canvas>
     <!-- <div id="game-wrapper"> -->
       <!-- lillypads -->
       <!-- <div class="obj lilypad" id="lilypad1"></div>
@@ -50,17 +50,18 @@
       <div class="obj lateral-moving left" id="yellow-racecar"><img id="" src="images/yellow-racecar.png" alt="yellow-racecar"></div>
       <div class="obj" id="frog"><img id="" src="images/frog.png" alt="frog"></div>
     </div> -->
-    <div id="game-labels-wrapper">
-      <div id="frog-lives">
-        <img src="images/frogger-pixel.png" alt="frog1">
-        <img src="images/frogger-pixel.png" alt="frog2">
-        <img src="images/frogger-pixel.png" alt="frog3">
+    <center>
+      <div id="game-labels-wrapper">
+        <div id="frog-lives">
+          <img src="images/frogger-pixel.png" alt="frog1">
+          <img src="images/frogger-pixel.png" alt="frog2">
+          <img src="images/frogger-pixel.png" alt="frog3">
+        </div>
+        <p id="scoreLable"> SCORE: <span id="score">0</span></p>
+        <p id="timeLable"><span id="time">60</span> :TIME</p>
       </div>
-      <p id="scoreLable"> SCORE: <span id="score">0</span></p>
-      <p id="timeLable"><span id="time">60</span> :TIME</p>
-    </div>
+  </center>
   </div>
-  
   <div id="enterName" class="win-or-loose">
       <label for="name" id="nameLabel">ENTER YOUR NAME: </label>
       <input type="text" id="name" name="yourName">
