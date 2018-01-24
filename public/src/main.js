@@ -37,6 +37,7 @@ $('#scores').on('click', function () {
 // code for collision was created with references to:
 // https://magently.com/blog/detecting-a-jquery-collision-part-i/
 // https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
+// https://www.safaribooksonline.com/library/view/html5-canvas-2nd/9781449335847/ch04s10s03.html
 // and Jay
 // and super special thanks to Taka!!!!
 
@@ -53,7 +54,11 @@ var Images = new function() {
   this.racecar = new Image()
   this.bulldozer = new Image()
   this.yellowRacecar = new Image()
-  // this.log = new Image()
+  this.log = new Image()
+  // this.medLog = new Image()
+  // this.bigLog = new Image()
+  // this.twoTurtle = new Image()
+  // this.threeTurtle = new Image()
 
 	// Ensure all images have loaded before starting the game
   var numImages = 6
@@ -68,33 +73,26 @@ var Images = new function() {
     }
   }
   this.frog.onload = function () {
-    console.log('frog loaded')
     imageLoaded()
   }
   this.truck.onload = function () {
     imageLoaded()
-    console.log("truck loaded")
   }
   this.redcar.onload = function () {
     imageLoaded()
-    console.log("redcar loaded")
   }
   this.racecar.onload = function () {
     imageLoaded()
-    console.log("racecar loaded")
   }
   this.bulldozer.onload = function () {
     imageLoaded()
-    console.log("bulldozer loaded")
   }
   this.yellowRacecar.onload = function () {
     imageLoaded()
-    console.log("yellow loaded")
   }
-  // this.log.onload = function () {
-  //   imageLoaded()
-  //   console.log("log loaded")
-  // }
+  this.log.onload = function () {
+    imageLoaded()
+  }
 
 	// Set images src;
   this.frog.src = '../images/frog.png'
@@ -103,14 +101,15 @@ var Images = new function() {
   this.racecar.src = '../images/racecar.png'
   this.bulldozer.src = '../images/bulldozer.png'
   this.yellowRacecar.src = '../images/yellow-racecar.png'
-  // this.log.src = '../images/log.png'
+  this.log.src = '../images/brown-log.png'
 }
 
 let x = 225
-let y = 520
-let width = 35
-let height = 35
-// ----------------- MOVE FROG ---------------//
+// let y = 520
+let y = 230
+let width = 30
+let height = 30
+// ---------------------------- MOVE FROG ----------------------//
 // KEY PRESS
 // key monitor
 let rightPressed = false
@@ -177,11 +176,12 @@ function moveFrog () {
   }
 }
 
-// ----------------- MOVE CARS---------------//
-// array of vehicle objects
-let lateralObjsArray = []
+// ---------------------- MOVE CARS------------------------//
+// array of vehicle and water objects
+let landObjsArr = []
+let waterObjsArr = []
 
-// constructor to easily draw vehicles
+// constructor to easily draw vehicles & other objs
 let ItemConstructor = function (obj, width, height, speed, x, y) {
   this.obj = obj
   this.width = width
@@ -199,22 +199,32 @@ let redcarObj
 let racecarObj
 let bulldozerObj
 let yellowRacecarObj
+let tinyLogObj
+let medLogObj
+let bigLogObj
 
 function postionObjs () {
-  // initate constructors
-  frogObj = new ItemConstructor(Images.frog, 35, 35, 225, 520)
+  // initate land objects
+  frogObj = new ItemConstructor(Images.frog, 30, 30, 225, 520)
   truckObj = new ItemConstructor(Images.truck, 140, 45, 1.5, 225, 270)
   redcarObj = new ItemConstructor(Images.redcar, 50, 34, 3, 220, 380)
   racecarObj = new ItemConstructor(Images.racecar, 50, 50, 4, 280, 320)
   bulldozerObj = new ItemConstructor(Images.bulldozer, 50, 45, 3, 60, 410)
   yellowRacecarObj = new ItemConstructor(Images.yellowRacecar, 55, 48, 3, 100, 470)
 
-  lateralObjsArray.push(truckObj, redcarObj, racecarObj, bulldozerObj, yellowRacecarObj)
+  landObjsArr.push(truckObj, redcarObj, racecarObj, bulldozerObj, yellowRacecarObj)
+
+  // initiate water objs
+  tinyLogObj = new ItemConstructor(Images.log, 60, 35, 1.9, 300, 130)
+  medLogObj = new ItemConstructor(Images.log, 80, 35, 1.9, 100, 80)
+  bigLogObj = new ItemConstructor(Images.log, 100, 35, 1.7, 225, 0)
+
+  waterObjsArr.push(tinyLogObj, medLogObj, bigLogObj)
 }
 
 function drawCars () {
   // draw each vehicle in the lateral objs array
-  lateralObjsArray.forEach(elem => {
+  landObjsArr.forEach(elem => {
     ctx.drawImage(elem.obj, elem.x, elem.y, elem.width, elem.height)
     elem.imageData = ctx.getImageData(elem.x, elem.y, elem.width, elem.height)
   })
@@ -253,20 +263,19 @@ function moveCars () {
   }
 }
 
-// ----------------- COLLISION DETECTION---------------//
-function hasCollided () {
-  lateralObjsArray.forEach(elem => {
+// --------------------- COLLISION DETECTION---------------------//
+function carCollided () {
+  landObjsArr.forEach(elem => {
     if (elem.x <= x + width &&
       elem.x + elem.width >= x &&
       elem.y + elem.height >= y &&
       elem.y <= y + height) {
         // console.log('detected!!!')
-        // y = 530
-        pixelCollision(elem)
+        y = 530
+        // pixelCollision(elem)
     }
   })
 }
-// referenced from https://www.safaribooksonline.com/library/view/html5-canvas-2nd/9781449335847/ch04s10s03.html
 
 function pixelCollision (elem) {
   // get area of collision intersection
@@ -290,15 +299,67 @@ function pixelCollision (elem) {
   }
 }
 
+// ---------------------- MOVE LOGS & TURTLES------------------------//
+
+function drawLogs () {
+  waterObjsArr.forEach(elem => {
+    ctx.drawImage(elem.obj, elem.x, elem.y, elem.width, elem.height)
+    // elem.imageData = ctx.getImageData(elem.x, elem.y, elem.width, elem.height)
+  })
+}
+
+function moveLogs () {
+  // tinylog
+  if (tinyLogObj.x < canvas.width + 100) {
+    tinyLogObj.x += tinyLogObj.speed
+  } else {
+    tinyLogObj.x = -100
+  }
+  // medlog
+  if (medLogObj.x < canvas.width + 100) {
+    medLogObj.x += medLogObj.speed
+  } else {
+    medLogObj.x = -100
+  }
+  // biglog
+  if (bigLogObj.x < canvas.width + 100) {
+    bigLogObj.x += bigLogObj.speed
+  } else {
+    bigLogObj.x = -100
+  }
+}
+
+function float () {
+  if (y < 230) {
+    waterObjsArr.forEach(elem => {
+      if (elem.x <= x + width &&
+        elem.x + elem.width >= x &&
+        elem.y + elem.height >= y &&
+        elem.y <= y + height) {
+          if (x < 515 && x > -15) {
+            x += elem.speed
+            console.log('detected!!!')
+          }
+          
+          // y = 530
+          // pixelCollision(elem)
+      }
+    })
+  }
+}
+
 // REQUEST ANIMATION FRAME
 function draw () {
   // stop images from repeating as they move
   ctx.clearRect(0, 0, canvas.width, canvas.height)
+  drawLogs()
   drawFrog()
   moveFrog()
   drawCars()
   // moveCars()
-  hasCollided()
+  moveLogs()
+  float()
+  carCollided()
   requestAnimationFrame(draw)
 }
 
@@ -382,11 +443,11 @@ const $frog = $('#frog')
 // let movingFrog = new itemConstructor($frog)
 
 // /* Global variable */
-// let lateralObjsArray = [] // will contain all lateral moving items
+// let landObjsArr = [] // will contain all lateral moving items
 
 // /* Define array of all lateral moving objects and instantiate them */
 // $lateralObjs.each(function (index) {
-//   lateralObjsArray.push(new itemConstructor($(this)))
+//   landObjsArr.push(new itemConstructor($(this)))
 // })
 
 // $('#homeStartBtn').on('click', startGame)
@@ -411,7 +472,7 @@ const $frog = $('#frog')
 //     // redcarPosX -= 6
 //     // racecarPosX += 6
 //     //
-//     lateralObjsArray.forEach(car => {
+//     landObjsArr.forEach(car => {
 //       car.updateSpeed()
 //       $(car.cssObj).css('transform', `translate3d(${car.posXmin}px, ${car.posYmin}px, 0px)`)
 //       if (car.posXmin < -5) {
@@ -463,7 +524,7 @@ const $frog = $('#frog')
 
 //   let hasCollided = false
 //   function checkForCrashFrog () {
-//       lateralObjsArray.forEach(function (car) {
+//       landObjsArr.forEach(function (car) {
 //         if (movingFrog.clientRect().x < car.clientRect().x + car.clientRect().width &&
 //             movingFrog.clientRect().x + movingFrog.clientRect().width > car.clientRect().x &&
 //             movingFrog.clientRect().y < car.clientRect().y + car.clientRect().height &&
