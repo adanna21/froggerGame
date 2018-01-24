@@ -53,34 +53,49 @@ var Images = new function() {
   this.racecar = new Image()
   this.bulldozer = new Image()
   this.yellowRacecar = new Image()
+  // this.log = new Image()
 
 	// Ensure all images have loaded before starting the game
   var numImages = 6
   var numLoaded = 0
-  function imageLoaded() {
-  numLoaded++;
-  if (numLoaded === numImages) {
-  window.onload = draw()
-}
-}
+  
+  function imageLoaded () {
+    numLoaded++
+    if (numLoaded === numImages) {
+      console.log(numLoaded)
+      postionObjs()
+      draw()
+    }
+  }
   this.frog.onload = function () {
-  imageLoaded()
-}
-  this.truck.onload = function () {
-  imageLoaded()
-}
-  this.redcar .onload = function () {
-  imageLoaded()
-}
-  this.racecar.onload = function () {
-  imageLoaded()
-}
-  this.bulldozer.onload = function () {
-  imageLoaded()
-}
-  this.yellowRacecar.onload = function () {
+    console.log('frog loaded')
     imageLoaded()
   }
+  this.truck.onload = function () {
+    imageLoaded()
+    console.log("truck loaded")
+  }
+  this.redcar.onload = function () {
+    imageLoaded()
+    console.log("redcar loaded")
+  }
+  this.racecar.onload = function () {
+    imageLoaded()
+    console.log("racecar loaded")
+  }
+  this.bulldozer.onload = function () {
+    imageLoaded()
+    console.log("bulldozer loaded")
+  }
+  this.yellowRacecar.onload = function () {
+    imageLoaded()
+    console.log("yellow loaded")
+  }
+  // this.log.onload = function () {
+  //   imageLoaded()
+  //   console.log("log loaded")
+  // }
+
 	// Set images src;
   this.frog.src = '../images/frog.png'
   this.truck.src = '../images/truck.png'
@@ -88,12 +103,13 @@ var Images = new function() {
   this.racecar.src = '../images/racecar.png'
   this.bulldozer.src = '../images/bulldozer.png'
   this.yellowRacecar.src = '../images/yellow-racecar.png'
+  // this.log.src = '../images/log.png'
 }
 
 let x = 225
-let y = 510
-let width = 50
-let height = 50
+let y = 520
+let width = 35
+let height = 35
 // ----------------- MOVE FROG ---------------//
 // KEY PRESS
 // key monitor
@@ -127,6 +143,7 @@ function keyDownHandler (e) {
 
 function drawFrog () {
   ctx.drawImage(Images.frog, x, y, width, height)
+  frogObj.imageData = ctx.getImageData(x, y, width, height)
 }
 
 function moveFrog () {
@@ -172,20 +189,34 @@ let ItemConstructor = function (obj, width, height, speed, x, y) {
   this.x = x
   this.y = y
   this.speed = speed
+  this.imageData = ctx.getImageData(this.x, this.y, this.width, this.height)
 }
 
-// initate constructors
-let truckObj = new ItemConstructor(Images.truck, 140, 40, 1.5, 225, 270)
-let redcarObj = new ItemConstructor(Images.redcar, 40, 35, 3, 220, 380)
-let racecarObj = new ItemConstructor(Images.racecar, 55, 40, 4, 280, 320)
-let bulldozerObj = new ItemConstructor(Images.bulldozer, 75, 70, 3, 60, 410)
-let yellowRacecarObj = new ItemConstructor(Images.yellowRacecar, 60, 60, 3, 100, 460)
-lateralObjsArray.push(truckObj, redcarObj, racecarObj, bulldozerObj, yellowRacecarObj)
+// initate constructor varaibles
+let frogObj
+let truckObj
+let redcarObj
+let racecarObj
+let bulldozerObj
+let yellowRacecarObj
+
+function postionObjs () {
+  // initate constructors
+  frogObj = new ItemConstructor(Images.frog, 35, 35, 225, 520)
+  truckObj = new ItemConstructor(Images.truck, 140, 45, 1.5, 225, 270)
+  redcarObj = new ItemConstructor(Images.redcar, 50, 34, 3, 220, 380)
+  racecarObj = new ItemConstructor(Images.racecar, 50, 50, 4, 280, 320)
+  bulldozerObj = new ItemConstructor(Images.bulldozer, 50, 45, 3, 60, 410)
+  yellowRacecarObj = new ItemConstructor(Images.yellowRacecar, 55, 48, 3, 100, 470)
+
+  lateralObjsArray.push(truckObj, redcarObj, racecarObj, bulldozerObj, yellowRacecarObj)
+}
 
 function drawCars () {
   // draw each vehicle in the lateral objs array
   lateralObjsArray.forEach(elem => {
     ctx.drawImage(elem.obj, elem.x, elem.y, elem.width, elem.height)
+    elem.imageData = ctx.getImageData(elem.x, elem.y, elem.width, elem.height)
   })
 }
 
@@ -223,36 +254,40 @@ function moveCars () {
 }
 
 // ----------------- COLLISION DETECTION---------------//
-// var pixelMap = []
-// function mapPixels () {
-//   for( var i = 0; i < truckObj.width; i++ ) {
-//   for( var j = 0; j < truckObj.height; j++ ) {
-// 	// Fetch pixel at current position
-//     var pixel = ctx.getImageData( j, i, 1, 1 )
-//     console.log(pixel.data)
-// 	// Check that opacity is above zero
-//     if( pixel.data[3] != 0 ) {
-//       pixelMap.push( { x:j, y:i } )
-//     }
-//   }
-// }
-//   console.log(pixelMap)
-// }
-
 function hasCollided () {
   lateralObjsArray.forEach(elem => {
-    if (elem.x < x + width  && elem.x + elem.width  > x &&
-      elem.y < y + height && elem.y + elem.height > y) {
-  // The objects are touching
-     y = 510
-  }
-    // if (elem.x <= x + width &&
-    //   elem.x + elem.width >= x &&
-    //   elem.y + elem.height >= y &&
-    //   elem.y <= y + height) {
-    //   y = 510
-    // }
+    if (elem.x <= x + width &&
+      elem.x + elem.width >= x &&
+      elem.y + elem.height >= y &&
+      elem.y <= y + height) {
+        // console.log('detected!!!')
+        // y = 530
+        pixelCollision(elem)
+    }
   })
+}
+// referenced from https://www.safaribooksonline.com/library/view/html5-canvas-2nd/9781449335847/ch04s10s03.html
+
+function pixelCollision (elem) {
+  // get area of collision intersection
+  var xMin = Math.max(x, elem.x)
+  var yMin = Math.max(y, elem.y)
+  var xMax = Math.min(x + width, elem.x + elem.width)
+  var yMax = Math.min(y + height, elem.y + elem.height)
+
+  for (var pixelX = xMin; pixelX < xMax; pixelX++) {
+    for (var pixelY = yMin; pixelY < yMax; pixelY++) {
+      var frogpixel = ((pixelX - x) + (pixelY - y) * width) * 4 + 3
+      var elempixel = ((pixelX - elem.x) + (pixelY - elem.y) * elem.width) * 4 + 3
+      if ((frogObj.imageData.data[ frogpixel ] !== 0) &&
+        (elem.imageData.data[ elempixel ] !== 0)) {
+        console.log("pixel collision")
+        y = 530
+        x = 225
+        break
+      }
+    }
+  }
 }
 
 // REQUEST ANIMATION FRAME
@@ -262,7 +297,7 @@ function draw () {
   drawFrog()
   moveFrog()
   drawCars()
-  moveCars()
+  // moveCars()
   hasCollided()
   requestAnimationFrame(draw)
 }

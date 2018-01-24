@@ -126,7 +126,7 @@ body {
   height: 90%; */
   background-color: lightgray;
   background: url(../images/water-copy.jpg);
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
   /*background-position: center;*/
