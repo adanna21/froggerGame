@@ -53,20 +53,21 @@
     <center>
       <div id="game-labels-wrapper">
         <div id="frog-lives">
-          <img src="images/frogger-pixel.png" alt="frog1">
-          <img src="images/frogger-pixel.png" alt="frog2">
-          <img src="images/frogger-pixel.png" alt="frog3">
+          <img class="frogs" src="images/frogger-pixel.png" alt="frog1">
+          <img class="frogs" src="images/frogger-pixel.png" alt="frog2">
+          <img class="frogs" src="images/frogger-pixel.png" alt="frog3">
         </div>
         <p id="scoreLable"> SCORE: <span id="score">0</span></p>
         <p id="timeLable"><span id="time">60</span> :TIME</p>
       </div>
   </center>
   </div>
-  <div id="enterName" class="win-or-loose">
+  <form id="enterName" class="win-or-loose" method="POST" action="/user">
       <label for="name" id="nameLabel">ENTER YOUR NAME: </label>
-      <input type="text" id="name" name="yourName">
-      <button id="nameButton" type="button">OK</button>
-  </div>
+      <input type="text" id="name" name="name">
+      <input type="hidden" id="yourScore" name="score" value="">
+      <button id="nameButton" type="submit">OK</button>
+  </form>
   <div id="win" class="win-or-loose">Time:<span id="time2">60</span> </div>
 
   <!--#######################################################################################
