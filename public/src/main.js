@@ -6,6 +6,7 @@
 const $gamePage = $('#gameContainer')
 const $homePage = $('#homeContainer')
 const $scorePage = $('#scoresContainer')
+const $disclaimerPage = $('#disclaimerContainer')
 // get start button
 const $play = $('#homeStartBtn')
 
@@ -16,9 +17,11 @@ let startTimer
 // mainSong.play()
 mainSong.loop = false
 // when play is clicked
-$('#homeStartBtn').on('click', function () {
+$('#homeStartBtn, #newGameBtn, #yes').on('click', function () {
   mainSong.pause()
   $homePage.css('display', 'none')
+  $scorePage.css('display', 'none')
+  $disclaimerPage.css('display', 'none')
   $gamePage.css('display', 'block')
   startTimer = setInterval(function(){ timer() }, 1000)
     // mainSong.pause()
@@ -32,6 +35,19 @@ $('#scores').on('click', function () {
   $scorePage.css('display', 'block')
 })
 
+// when disclaimer clicked
+$('#disclaimer').on('click', function () {
+  mainSong.pause()
+  $homePage.css('display', 'none')
+  $gamePage.css('display', 'none')
+  $disclaimerPage.css('display', 'block')
+  $scorePage.css('display', 'none')
+})
+
+// when back clicked
+$('#backBtn, #no').on('click', function () {
+  location.reload()
+})
 // #######################################################################################
 // #################################  GAME PAGE   #####################################
 // #######################################################################################
@@ -126,15 +142,15 @@ let Images = new function() {
 // frog position and size
 let x = 225
 // let y = 520
-let y = 230
+let y = 560
 let width = 25
 let height = 25
 
 let lives = 3
 let lostLives = 0
-let frogs = document.getElementById('frog-lives')
 let frogImages = document.querySelectorAll('.frogs')
-console.log(frogs)
+let score = 0
+
 // ---------------------------- MOVE FROG ----------------------//
 // KEY PRESS
 // key monitor
@@ -175,13 +191,20 @@ function moveFrog () {
   if (upPressed === true && up === true && y > -10) {
     // ctx.rotate(.5)
     y -= 10
+    score += 10
+    scoreValue.value = `${score}`
+    scoreText.innerText = `${score}`
     up = false
+    console.log(score)
   } else if (upPressed === false) {
     up = true
   }
 
-  if (downPressed === true && down === true && y < 530) {
+  if (downPressed === true && down === true && y < 560) {
     y += 10
+    score -= 5
+    scoreValue.value = `${score}`
+    scoreText.innerText = `${score}`
     down = false
   } else if (downPressed === false) {
     down = true
@@ -245,7 +268,7 @@ let pad5Obj
 
 function postionObjs () {
   // initate land objects
-  frogObj = new ItemConstructor(Images.frog, 30, 30, 225, 520)
+  frogObj = new ItemConstructor(Images.frog, 30, 30, 225, 560)
   truckObj = new ItemConstructor(Images.truck, 140, 45, 1.5, 225, 290)
   redcarObj = new ItemConstructor(Images.redcar, 50, 34, 3, 220, 400)
   racecarObj = new ItemConstructor(Images.racecar, 50, 50, 4, 280, 340)
@@ -483,8 +506,8 @@ function onPad () {
         elem.y + elem.height >= y &&
         elem.y <= y + height) {
           elem.onPad = true
-          y = 530
-          x = 225
+          y = 560
+          x = 230
           console.log('onpad!!!')
       }
     })
@@ -546,6 +569,16 @@ function gameOver () {
   }
 }
 // ------------ WIN -------------//
+let scoreValue = document.getElementById('yourScore')
+let scoreText = document.getElementById('score')
+
+function scorePonts() {
+  if (upPressed) {
+    score += 10
+  } 
+  scoreValue.value = `${score}`
+  scoreText.innerText = `${score}`
+}
 
 // REQUEST ANIMATION FRAME
 function draw () {
@@ -564,69 +597,31 @@ function draw () {
   gameOver()
   if (play) {
     requestAnimationFrame(draw)
-  
   }
-  
 }
 
-//   // ----------------- Collision Detection ---------------//
-//   let $frogImages = $('#frog-lives img')
-//   let $frogLivesChildren = $('#frog-lives').children()
-//   let lives = 2
-//   const dieSong = new Audio('assets/frogger-squash.wav')
 
-//   let $win = $('#win')
-//   let $winTime = $('#time2')
+// ----------------- POST SCORE ---------------//
 
-//   let hasCollided = false
-//   function checkForCrashFrog () {
-//       landObjsArr.forEach(function (car) {
-//         if (movingFrog.clientRect().x < car.clientRect().x + car.clientRect().width &&
-//             movingFrog.clientRect().x + movingFrog.clientRect().width > car.clientRect().x &&
-//             movingFrog.clientRect().y < car.clientRect().y + car.clientRect().height &&
-//             movingFrog.clientRect().y + movingFrog.clientRect().height > car.clientRect().y) {
-//             // collision detected!
-//           if (frogY < 245 && lives !== 0) {
-//                $win.css('visibility', 'visible')
-//                $winTime.text(`${counter}`)
-//                score += counter
-//                $(document).on('keydown', (e) => { moveFrog(e) }).off()
-//                setPosition($frog, '245px', '600px', 0)
-//                frogX = 245
-//                frogY = 600
 
-//                setTimeout(function () {
-//                   counter = 60
-//                   $win.css('visibility', 'hidden')
-//                   $(document).on('keydown', (e) => { moveFrog(e) })
-//                 }, 800)
-//              }else {
-//                $frog.children('img').attr('src', ('images/icons8-Poison-96.png'))
-//                dieSong.play()
-//                setTimeout(function () {
-//               $frog.children('img').attr('src', ('images/frog.png'))
-//                 // remove a frog life
-//               hasCollided = true
-//               $frogImages[lives].remove()
+function attachUsersToPage(data) {
+  const scorePage = document.getElementById('score-wrapper')
+  let number = 1
+  data.users.forEach((user) => {
+    const userDiv = document.createElement('div');
+    userDiv.classList.add('user');
+    
+    userDiv.innerHTML = `<h3>${number++}. ${user.name}</h3>`;
+    userDiv.innerHTML += `<p class='score'>${user.score}</p>`;
+    scorePage.appendChild(userDiv);
+  })
+}
 
-//               setPosition($frog, '245px', '600px', 0)
-//               frogX = 245
-//               frogY = 600
-//             }, 600)
-//                if (hasCollided === true) {
-//                lives--
-//              }
-//                hasCollided = false
-//              }// end of if statement
-//         }
-//       })// end of forEach
 
-//       // ----------------- GAME OVER CODE ---------------//
-//       let $enterNameMsg = $('#enterName')
+function fetchUsers() {
+  fetch('/users').then(res => res.json()).then(jsonRes => {
+    attachUsersToPage(jsonRes.data);
+  })
+}
 
-//       if (lives == 0) {
-//         $enterNameMsg.css('visibility', 'visible')
-//         $(document).on('keydown', (e) => { moveFrog(e) }).off()
-//         clearInterval(setIntID)
-//       }
-//     }// end of checkForCrashFrog
+document.addEventListener('DOMContentLoaded', fetchUsers);

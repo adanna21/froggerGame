@@ -6,7 +6,7 @@ body {
 /*####################################################################################*/
 /*###############################   Home Screen   ####################################*/
 /*####################################################################################*/
-#homeContainer {
+#homeContainer, #scoresContainer, #disclaimerContainer {
   width: 100vw;
   height: 100vh;
   /* image from https://www.2ndchanceplay.com/NY/Frogger/*/
@@ -21,7 +21,7 @@ body {
  /* font-family: 'Ravi Prakash', cursive;*/
 
 }
-#overlay {
+.overlay {
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, .7);
@@ -102,7 +102,7 @@ body {
 /*###############################   Game Screen   ####################################*/
 /*####################################################################################*/
 
-#gameContainer, #scoresContainer {
+#gameContainer {
   display: flex;
   flex-direction: column;
   /* align-items: center;
@@ -116,7 +116,7 @@ body {
   font-size: 25px;
 }
 
-#game-wrapper, #score-wrapper {
+#game-wrapper{
   margin-top: 10px;
   /* position: relative;
   left: 28%; */
@@ -139,7 +139,7 @@ body {
   /* padding-right: 10%; */
   width: 550px;
   height: 100px;
-  background-color: #00a600;
+  /* background-color: #00a600; */
   /*background-position: center;*/
   overflow: hidden;
   /* display: flex; */
@@ -207,3 +207,63 @@ body {
 /*####################################################################################*/
 /*###############################   Score Screen   ####################################*/
 /*####################################################################################*/
+#scoresContainer, #disclaimerContainer {
+  font-family: 'Rancho', cursive;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+#score-wrapper {
+  margin-top: 20px;
+  width: 550px;
+  height: 80%;
+  /* -webkit-filter: grayscale(60%); /* Safari 6.0 - 9.0 */
+  /* filter: grayscale(60%);  */
+  opacity: .7;
+  position: relative;
+  left: 28%;
+  font-size: 2em;
+  /* overflow-y: scroll; */
+}
+#score-title {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px aquamarine solid;
+  color: #eff200;
+  margin-bottom: 20px;
+}
+
+.user {
+  display: flex;
+  justify-content: space-around;
+  color: #fff;
+}
+
+
+
+#new-game button, #disc button {
+  display: inline;
+  width: 200px;
+  font-size: 1.5em;
+  margin-left: 0%;
+  margin-bottom: 0%;
+}
+#newGameBtn {
+  margin-right: 5%;
+}
+#disclaimerContainer div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#disclaimer-wrapper {
+  display: flex;
+  margin-bottom: 5%;
+  font-size: 2em;
+  color: #fff;
+  /* justify-content: center;
+  align-items: center; */
+}
